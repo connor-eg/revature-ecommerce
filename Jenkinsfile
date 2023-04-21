@@ -23,7 +23,7 @@ pipeline {
                 //Stop any running containers of this image (do not fail if it can't)
                 script {
                     try {
-                        bat 'docker rm -f (\'docker ps -a -f name=ecomback -q\')'
+                        bat 'docker rm -f ecomback'
                     } catch (Exception err) {
                         echo err.getMessage()
                     }
