@@ -15,6 +15,6 @@ public class ProductControllerTest {
 
     @Test
     void getItemsThrowsExceptionWithBadToken(){
-        assertThrows(SessionTokenInvalidException.class, () -> {productController.getAllItems("badtoken");}, "The productController accepted a bad token");
+        assertThrows(SessionTokenInvalidException.class, () -> {productController.getAllItems("badtoken");}, "The ProductController accepted a bad token");
     }
 }
