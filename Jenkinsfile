@@ -7,14 +7,14 @@ pipeline {
                 echo 'Building the .jar file'
                 
                 //Builds and create our .jar file
-                sh 'mvn clean package'
+                bat 'mvn clean package'
             }
         }
         
         stage('Creating Docker image') {
             steps {
                 //Builds the image of our application
-                sh 'sudo docker build -t connoreg/ecombackend:latest .'
+                bat 'docker build -t connoreg/ecombackend:latest .'
             }
         }
 
@@ -23,7 +23,7 @@ pipeline {
                 //Stop any running containers of this image (do not fail if it can't)
                 script {
                     try {
-                        sh 'sudo docker rm -f $(sudo docker ps -af name=p2back -q)'
+                        bat 'docker rm -f | docker ps -a -f name=ecomback -q'
                     } catch (Exception err) {
                         echo err.getMessage()
                     }
@@ -34,7 +34,7 @@ pipeline {
         stage('Deploying into docker container') {
             steps {
                 //Run latest version of image in a container
-                sh 'sudo docker run $dockerrunflags -p 4798:4798 --name p2back -e spring.ecommerce.url=$spring.ecommerce.url -e spring.username=$spring.username -e spring.password=$spring.password connoreg/p2backend:latest'
+                bat 'sudo docker run -d -p 8081:8081 --name ecomback -e spring.ecommerce.url=$spring.ecommerce.url -e spring.username=$spring.username -e spring.password=$spring.password connoreg/ecombackend:latest'
             }
         }
     }
