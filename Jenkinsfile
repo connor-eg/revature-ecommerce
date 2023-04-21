@@ -23,7 +23,7 @@ pipeline {
                 //Stop any running containers of this image (do not fail if it can't)
                 script {
                     try {
-                        bat 'docker rm -f | docker ps -a -f name=ecomback -q'
+                        bat 'docker rm -f (\'docker ps -a -f name=ecomback -q\')'
                     } catch (Exception err) {
                         echo err.getMessage()
                     }
@@ -34,7 +34,7 @@ pipeline {
         stage('Deploying into docker container') {
             steps {
                 //Run latest version of image in a container
-                bat 'sudo docker run -d -p 8081:8081 --name ecomback -e spring.ecommerce.url=$spring.ecommerce.url -e spring.username=$spring.username -e spring.password=$spring.password connoreg/ecombackend:latest'
+                bat 'docker run -d -p 8081:8081 --name ecomback -e spring.ecommerce.url=$spring.ecommerce.url -e spring.username=$spring.username -e spring.password=$spring.password connoreg/ecombackend:latest'
             }
         }
     }
