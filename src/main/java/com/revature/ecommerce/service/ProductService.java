@@ -2,6 +2,7 @@ package com.revature.ecommerce.service;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,12 @@ public class ProductService {
     public List<Product> getAllProducts(String token) throws SessionTokenInvalidException {
         userService.validateUser(token);
         return productRepository.findAll();
+    }
+
+    public Product getProduct(String token, long productId) throws SessionTokenInvalidException {
+        userService.validateUser(token);
+        Optional<Product> productOptional = productRepository.findById(productId);
+        return productOptional.isPresent()? productOptional.get() : null;
     }
     
 }

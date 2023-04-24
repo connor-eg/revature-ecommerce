@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,8 +29,19 @@ public class ProductController {
     //Retrieve a list of all products that exist.
     //Requires a valid session token.
     @GetMapping("/")
-    public ResponseEntity<List<Product>> getAllItems(@RequestHeader String token) throws SessionTokenInvalidException {
+    public ResponseEntity<List<Product>> getAllItems(
+        @RequestHeader String token,
+        @RequestHeader(required = false) Long productId
+        ) throws SessionTokenInvalidException {
         return ResponseEntity.status(200).body(productService.getAllProducts(token));
+    }
+
+    @GetMapping("/product/{id}")
+    public ResponseEntity<Product> getItem(
+        @RequestHeader String token,
+        @PathVariable long id
+    ) throws SessionTokenInvalidException {
+        return ResponseEntity.status(200).body(productService.getProduct(token, id));
     }
     
     //List a new product by adding it to the database.
