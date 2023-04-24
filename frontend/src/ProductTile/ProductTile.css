@@ -1,0 +1,7 @@
+.box {
+    border: 2px black solid;
+    border-radius: 10px;
+    min-width: 140px;
+
+    align-content: center;
+}
