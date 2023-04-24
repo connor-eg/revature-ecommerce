@@ -34,7 +34,7 @@ pipeline {
         stage('Deploying into docker container') {
             steps {
                 //Run latest version of image in a container
-                bat 'docker run -p 8081:8081 --name ecomback connoreg/ecombackend:latest'
+                bat 'docker run -d -p 8081:8081 --name ecomback connoreg/ecombackend:latest'
             }
         }
     }
