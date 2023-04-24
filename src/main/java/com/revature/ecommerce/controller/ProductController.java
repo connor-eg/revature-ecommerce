@@ -30,8 +30,7 @@ public class ProductController {
     //Requires a valid session token.
     @GetMapping("/")
     public ResponseEntity<List<Product>> getAllItems(
-        @RequestHeader String token,
-        @RequestHeader(required = false) Long productId
+        @RequestHeader String token
         ) throws SessionTokenInvalidException {
         return ResponseEntity.status(200).body(productService.getAllProducts(token));
     }
