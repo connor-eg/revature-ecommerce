@@ -34,7 +34,7 @@ pipeline {
         stage('Deploying into docker container') {
             steps {
                 //Run latest version of image in a container
-                bat 'docker run -p 8081:8081 --name ecomback -e spring.ecommerce.url=%spring.ecommerce.url% -e spring.username=%spring.username% -e spring.password=%spring.password% connoreg/ecombackend:latest'
+                bat 'docker run -p 8081:8081 --name ecomback connoreg/ecombackend:latest'
             }
         }
     }
