@@ -35,13 +35,11 @@ public class ProductService {
     }
 
     //Returns a list of all products in the database, provided that the user has given a valid token.
-    public List<Product> getAllProducts(String token) throws SessionTokenInvalidException {
-        userService.validateUser(token);
+    public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
 
-    public Product getProduct(String token, long productId) throws SessionTokenInvalidException {
-        userService.validateUser(token);
+    public Product getProduct(long productId) {
         Optional<Product> productOptional = productRepository.findById(productId);
         return productOptional.isPresent()? productOptional.get() : null;
     }

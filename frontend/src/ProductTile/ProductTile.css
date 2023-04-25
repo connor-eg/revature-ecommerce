@@ -1,7 +1,18 @@
 .box {
     border: 2px black solid;
     border-radius: 10px;
-    min-width: 140px;
+    min-width: 180px;
+    max-width: 180px;
 
     align-content: center;
+}
+
+.box > * {
+    text-align: center;
+}
+
+img {
+    border-radius: 10px;
+    max-width:100%;
+    height:auto;
 }

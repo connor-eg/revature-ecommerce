@@ -29,18 +29,15 @@ public class ProductController {
     //Retrieve a list of all products that exist.
     //Requires a valid session token.
     @GetMapping("/")
-    public ResponseEntity<List<Product>> getAllItems(
-        @RequestHeader String token
-        ) throws SessionTokenInvalidException {
-        return ResponseEntity.status(200).body(productService.getAllProducts(token));
+    public ResponseEntity<List<Product>> getAllItems() throws SessionTokenInvalidException {
+        return ResponseEntity.status(200).body(productService.getAllProducts());
     }
 
     @GetMapping("/product/{id}")
     public ResponseEntity<Product> getItem(
-        @RequestHeader String token,
         @PathVariable long id
     ) throws SessionTokenInvalidException {
-        return ResponseEntity.status(200).body(productService.getProduct(token, id));
+        return ResponseEntity.status(200).body(productService.getProduct(id));
     }
     
     //List a new product by adding it to the database.
