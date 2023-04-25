@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 //This controller handles everything that has to do with an individual product. That means getting products and adding them to the DB.
 @RestController
 @RequestMapping("/api/products")
+@CrossOrigin
 public class ProductController {
     ProductService productService;
 

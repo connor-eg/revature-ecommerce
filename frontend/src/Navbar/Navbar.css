@@ -1,3 +1,20 @@
-.bgcolor {
-    background-color: cadetblue;
+.bar {
+    background-color: rgb(144, 82, 6);
+    padding: 8px;
+}
+
+.bar > span {
+    border: 1px solid rgba(0, 0, 0, 0.318);
+    margin: 4px;
+    padding: 2px;
+}
+
+.bar > span > b > * {
+    color: rgb(243, 243, 243);
+    text-decoration: none;
+}
+
+.bar > span  > * :hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    text-decoration: none;
 }
