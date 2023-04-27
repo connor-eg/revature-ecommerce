@@ -1,0 +1,1 @@
+export const NO_IMAGE_ICON: string = 'https://static.thenounproject.com/png/3674270-200.png';
