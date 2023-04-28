@@ -4,9 +4,12 @@ import { REQUEST_URL } from "../common/defaults";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { set } from "../redux/slices/TokenSlice";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Register(){
-    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const [responseText, setResponseText] = useState("");
     
     return <div className="leftmargin">
         <h1>Register or do not.</h1>
@@ -18,16 +21,18 @@ function Register(){
         onSubmit={values => {
             axios.post<string>(REQUEST_URL + '/users/register', {}, {
                 headers: {
-                    'Accept': 'text/plain',
                     "username": values.userName,
                     "password": values.password
                 }}
             )
             .then(response => {
-                dispatch(set(response.data));
+                setResponseText("Account registered! You should be redirected shortly...");
+                setTimeout(() => {
+                    navigate("/login");
+                }, 2000);
             })
             .catch(err => {
-                console.log(err.toJSON());
+                setResponseText(err.response.data);
             })
         }}>
             <Form>
@@ -40,6 +45,7 @@ function Register(){
                 <button type="submit">Submit</button>
             </Form>
         </Formik>
+        <p>{responseText}</p>
     </div>
 }
 

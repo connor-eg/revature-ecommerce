@@ -77,7 +77,7 @@ public class UserService {
             user.setSessionToken(token);
             user.setSessionExpiry(EcommerceConstants.generateSessionExpiry());
             userRepository.save(user);
-            return ResponseEntity.status(200).body(token);
+            return ResponseEntity.status(200).body('"' + token + '"');
         } else {
             return ResponseEntity.status(403).body("\"Username or password was incorrect\"");
         }
