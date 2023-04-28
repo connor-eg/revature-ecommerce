@@ -24,14 +24,14 @@ public class ProductService {
     //Push a new product to the database. Requires a valid user session token, plus required information for the new product
     public ResponseEntity<String> newProduct(String token, Product product) throws SessionTokenInvalidException {
         if(product.getPrice().compareTo(new BigDecimal(0)) <= 0){
-            return ResponseEntity.status(400).body("The price of the product must be positive!");
+            return ResponseEntity.status(400).body("\"The price of the product must be positive!\"");
         }
 
         //This line just says that if someone wants to add a product listing they must be logged in.
         userService.validateUser(token);
 
         productRepository.save(product);
-        return ResponseEntity.status(200).body(product.getProductName() + " was listed successfully!");
+        return ResponseEntity.status(200).body('"' + product.getProductName() + " was listed successfully!\"");
     }
 
     //Returns a list of all products in the database, provided that the user has given a valid token.

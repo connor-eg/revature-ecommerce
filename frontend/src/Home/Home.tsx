@@ -3,15 +3,15 @@ import { Product } from "../model/Product";
 import ProductTile from "../ProductTile/ProductTile";
 import axios from "axios";
 import "./Home.css";
+import { REQUEST_URL } from "../common/defaults";
 
 function Home() {
     const [shopItems, setShopItems] = useState<Product[]>([]);
 
     //This will cause all of the shop items to be loaded on page load.
-    //This will use the token from a logged-in user.
     useEffect(() => {
         //make the axios request for the shop items
-        axios.get<Product[]>('http://localhost:8081/api/products/')
+        axios.get<Product[]>(REQUEST_URL + '/products/')
         .then(response => {
             setShopItems(response.data);
         })

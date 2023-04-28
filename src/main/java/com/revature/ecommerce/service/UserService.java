@@ -43,26 +43,26 @@ public class UserService {
 
     public String refreshToken(String sessionToken) throws SessionTokenInvalidException {
         validateUser(sessionToken);
-        return "Refreshed token successfully.";
+        return "\"Refreshed token successfully.\"";
     }
 
     //Register a user, checking if that user already exists in the database first
     public ResponseEntity<String> registerUser(String username, String password) {
         if(username.length() < 4) {
-            return ResponseEntity.status(400).body("Usernames must be at least 4 characters long!");
+            return ResponseEntity.status(400).body("\"Usernames must be at least 4 characters long!\"");
         }
         if(password.length() < 8) {
-            return ResponseEntity.status(400).body("Your password must be at least 8 characters long!");
+            return ResponseEntity.status(400).body("\"Your password must be at least 8 characters long!\"");
         }
 
         if(userRepository.existsByUserName(username)){
-            return ResponseEntity.status(409).body("There is already an account with that username!");
+            return ResponseEntity.status(409).body("\"There is already an account with that username!\"");
         } else {
             UserAccount nuser = new UserAccount();
             nuser.setUserName(username);
             nuser.setPassword(password);
             userRepository.save(nuser);
-            return ResponseEntity.status(200).body("Successfully created an account");
+            return ResponseEntity.status(200).body("\"Successfully created an account\"");
         }
     }
 
@@ -79,7 +79,7 @@ public class UserService {
             userRepository.save(user);
             return ResponseEntity.status(200).body(token);
         } else {
-            return ResponseEntity.status(403).body("Username or password was incorrect");
+            return ResponseEntity.status(403).body("\"Username or password was incorrect\"");
         }
     }
 

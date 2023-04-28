@@ -1,20 +1,20 @@
-.navbar {
-    background-color: rgb(144, 82, 6);
+.loginbar {
+    background-color: rgb(89, 54, 12);
     padding: 8px;
 }
 
-.navspan {
+.loginspan {
     border: 1px solid rgba(0, 0, 0, 0.318);
     padding: 2px;
     margin-left: 4px;
 }
 
-.navspan > b > * {
+.loginspan > b > * {
     color: rgb(243, 243, 243);
     text-decoration: none;
 }
 
-.navspan  > * :hover {
+.loginspan  > * :hover {
     background-color: rgba(0, 0, 0, 0.2);
     text-decoration: none;
 }

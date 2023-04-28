@@ -10,7 +10,7 @@ public class EcommerceExceptionAdvice extends ResponseEntityExceptionHandler {
     
     @ExceptionHandler(value = {SessionTokenInvalidException.class})
     protected ResponseEntity<String> sessionTokenInvalid (){
-        return ResponseEntity.status(403).body("Your session token is invalid! Try logging in again.");
+        return ResponseEntity.status(403).body("\"Your session token is invalid! Try logging in again.\"");
     }
 
 }

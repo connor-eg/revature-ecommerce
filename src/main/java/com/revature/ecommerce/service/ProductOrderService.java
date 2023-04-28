@@ -38,7 +38,7 @@ public class ProductOrderService {
 
     //Create a new order and add it to a user's cart.
     public ResponseEntity<String> newCartItem(String token, long itemId, int quantity) throws SessionTokenInvalidException {
-        if(quantity <= 0) return ResponseEntity.status(400).body("The number of items you want to buy must be above 0!");
+        if(quantity <= 0) return ResponseEntity.status(400).body("\"The number of items you want to buy must be above 0!\"");
         UserAccount u = userService.validateUser(token); //Validate the user and refresh their token
         Optional<Product> productOptional = productRepository.findById(itemId); //Check the database for the item the user wishes to add
 
@@ -58,9 +58,9 @@ public class ProductOrderService {
             pOrder.setQuantity(quantity);
             productOrderRepository.save(pOrder);
 
-            return ResponseEntity.status(200).body("Item added to cart.");
+            return ResponseEntity.status(200).body("\"Item added to cart.\"");
         } else {
-            return ResponseEntity.status(404).body("Item not found");
+            return ResponseEntity.status(404).body("\"Item not found\"");
         }
     }
 
@@ -69,10 +69,10 @@ public class ProductOrderService {
         UserAccount u = userService.validateUser(token);
         Set<ProductOrder> userProducts = u.getShoppingCart();
         if(userProducts.isEmpty()){
-            return ResponseEntity.status(400).body("There are no items in your cart!");
+            return ResponseEntity.status(400).body("\"There are no items in your cart!\"");
         } else {
             productOrderRepository.deleteAll(userProducts);
-            return ResponseEntity.status(200).body("Checked out your items.");
+            return ResponseEntity.status(200).body("\"Checked out your items.\"");
         }
     }
 
