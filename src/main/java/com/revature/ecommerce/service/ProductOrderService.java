@@ -76,4 +76,22 @@ public class ProductOrderService {
         }
     }
 
+    public ResponseEntity<String> removeCartItem(String token, long itemId) throws SessionTokenInvalidException {
+        UserAccount u = userService.validateUser(token);
+        ProductOrder itemToRemove = null;
+
+        for(ProductOrder po : u.getShoppingCart()){
+            if (po.getProduct().getId() == itemId){
+                itemToRemove = po;
+            }
+        }
+
+        if(itemToRemove != null){
+            productOrderRepository.delete(itemToRemove);
+            return ResponseEntity.status(200).body("\"Successfully removed the item from your cart.\"");
+        } else {
+            return ResponseEntity.status(404).body("\"There was no item with that ID in your cart!\"");
+        }
+    }
+
 }

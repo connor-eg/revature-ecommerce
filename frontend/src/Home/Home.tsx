@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Product } from "../model/Product";
-import ProductTile from "../ProductTile/ProductTile";
+import ProductTileShop from "../ProductTile/ProductTileShop";
 import axios from "axios";
 import "./Home.css";
 import { REQUEST_URL } from "../common/defaults";
@@ -21,13 +21,12 @@ function Home() {
     }, []);
     
     const tiles = shopItems.map(item => {
-        return <span key={item.id}><ProductTile {...item} /></span>
+        return <span key={item.id}><ProductTileShop {...item} /></span>
     })
     
     return (
         <div className="leftmargin">
-            <h1 className="leftmargin">Home page</h1>
-            <p className="leftmargin">wowzers</p>
+            <h1 className="leftmargin">Welcome to the shop!</h1>
             <div className="grid">{tiles}</div>
         </div>
     );

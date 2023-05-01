@@ -12,12 +12,12 @@ function Register(){
     const [responseText, setResponseText] = useState("");
     
     return <div className="leftmargin">
-        <h1>Register or do not.</h1>
+        <h1>Register for an account.</h1>
         <Formik 
         initialValues={{
             userName: '',
             password: ''
-        }} 
+        }}
         onSubmit={values => {
             axios.post<string>(REQUEST_URL + '/users/register', {}, {
                 headers: {

@@ -5,6 +5,8 @@ import { LoginBar } from "./accounts/LoginBar";
 import Register from "./accounts/Register";
 import Login from "./accounts/Login";
 import Logout from "./accounts/Logout";
+import NewItem from "./NewItem/NewItem";
+import Cart from "./Cart/Cart";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
+          <Route path="/new" element={<NewItem />}/>
+          <Route path="/cart" element={<Cart />}/>
         </Routes>
       </BrowserRouter>
     </div>

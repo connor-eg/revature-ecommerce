@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { REQUEST_URL } from "../common/defaults";
 import { Field, Form, Formik } from "formik";
 import axios from "axios";
+import { set } from "../redux/slices/TokenSlice";
 
 
 function Login() {
@@ -27,7 +28,7 @@ function Login() {
             )
             .then(response => {
                 setResponseText("Logged in successfully! You should be redirected shortly...");
-                ///dispatch(set(response.data));
+                dispatch(set(response.data));
                 setTimeout(() => {
                     navigate("/");
                 }, 2000);
