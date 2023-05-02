@@ -54,8 +54,8 @@ function NewItem(){
                 <label htmlFor="productName">Product name </label>
                 <Field id="productName" name="productName"></Field><br />
 
-                <label htmlFor="productDescription">Description </label>
-                <Field as="textarea" id="productDescription" name="productDescription"></Field><br />
+                <label htmlFor="description">Description </label>
+                <Field as="textarea" id="description" name="description"></Field><br />
 
                 <label htmlFor="price">Price </label>
                 <Field type="number" id="price" name="price" min="0" step="0.01"></Field><br />

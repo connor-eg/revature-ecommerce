@@ -5,25 +5,29 @@ import { RootState } from "../redux/store";
 import { Field, Form, Formik, FormikHelpers, FormikValues } from "formik";
 import axios from "axios";
 import { ProductOrder } from "../model/ProductOrder";
+import { Product } from "../model/Product";
 
 //This is the version of ProductTile that is displayed on the cart page.
 //It shows an "update quantity" button, as well as a "remove from cart" button.
 //It also displays the currently ordered quantity of an item.
 
-function ProductTileCart(props: ProductOrder){
+function ProductTileCart(props: {
+    product: Product,
+    quantity: number,
+    callback: Function}){
     const token = useSelector((state: RootState) => state.token.token);
 
-    function removeItem(id: number){
-        axios.post<string>(REQUEST_URL + '/cart/', {}, {
+    function removeItem(){
+        axios.delete<string>(REQUEST_URL + '/cart/', {
             headers: {
                 "token": token,
-                "itemId": props.product.id,
-                "quantity": 0
+                "itemId": props.product.id
             }}
         )
         .then(response => {
             console.log(response.data);
             alert("Item was removed.");
+            props.callback();
         })
         .catch(err => {
             console.log(err);
@@ -38,8 +42,8 @@ function ProductTileCart(props: ProductOrder){
             </center>
             <h4>{props.product.productName}</h4>
             <p>{props.product.description}</p>
-            <p><i>{new Intl.NumberFormat("en-US", {style: 'currency', currency: 'USD'}).format(props.product.price)}</i></p>
-            {(token !== '' && <center>
+            <p><i>{new Intl.NumberFormat("en-US", {style: 'currency', currency: 'USD'}).format(props.product.price)}</i> * {props.quantity} = {new Intl.NumberFormat("en-US", {style: 'currency', currency: 'USD'}).format(props.product.price * props.quantity)}</p>
+            <center>
                 <Formik initialValues={{
                     quantity: 1
                 }}
@@ -57,6 +61,7 @@ function ProductTileCart(props: ProductOrder){
                     .then(response => {
                         console.log(response.data);
                         alert("Quantity was updated");
+                        props.callback();
                     })
                     .catch(err => {
                         console.log(err);
@@ -67,11 +72,12 @@ function ProductTileCart(props: ProductOrder){
                         <label htmlFor="quantity">Quantity</label>
                         <Field type="number" id="quantity" name="quantity" min="1" step="1"></Field>
 
-                        <button type="submit">Add to cart</button>
+                        <button type="submit">Update quantity</button>
                     </Form>
                 </Formik><br />
-            </center>)}
-            <br/>
+            </center>
+            <center><button type='submit' onClick={removeItem}>Remove item from cart</button></center>
+            <br />
         </div>
     );
 }
