@@ -31,7 +31,7 @@ public class Product {
     private long id;
     
     @NonNull
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String productName;
 
     @NonNull
